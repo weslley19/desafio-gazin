@@ -15,7 +15,7 @@ class Users(Base):
 
     name = models.CharField('Nome', max_length=255, blank=False)
     sexo = models.CharField(max_length=1, choices=GENDER_CHOICES)
-    age = models.IntegerField('Idade', max_length=3, blank=False)
+    age = models.IntegerField('Idade', blank=False)
     hobby = models.TextField('Hobby', max_length=255, blank=False)
     birthdate = models.DateField('Data de nascimento', blank=False)
 
