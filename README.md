@@ -9,27 +9,12 @@ Para acessar os endpoints que necessitam de autorização, envie no header da re
 
 ## ENDPOINTS
 
-*Cliente*
-- [**Create**](#criar): /api/client/
-- [**Update**](#atualizar): /api/client/{id}/
-- [**ListAllClients**](#dados-de-todos-os-clientes): /api/client/
-- [**ListClient**](#cliente-especifico): /api/client/{id}/
-- [**Delete**](#deletar): /api/client/{id}/
-
-*Usuário*
-- [**Create**](#criar): /api/user/
-- [**Update**](#atualizar): /api/user/{id}/
-- [**ListAllUsers**](#dados-de-todos-os-usuarios): /api/user/
-- [**ListUser**](#usuario-especifico): /api/user/{id}/
-- [**Delete**](#deletar): /api/user/{id}/
-
-*Endereço*
-- [**Create**](#criar): /api/address/
-- [**Update**](#atualizar): /api/address/{id}/
-- [**GetAllAddress**](#dados-de-todos-os-address): /api/address/
-- [**GetAddress**](#address-especifico): /api/address/{id}/
-- [**Delete**](#deletar): /api/address/{id}/
-
+*Desenvolvedor*
+- [**Create**](#criar): /api/developers/
+- [**Update**](#atualizar): /api/developers/{id}/
+- [**ListAllDevelopers**](#dados-de-todos-os-desenvolvedores): /api/developers/
+- [**ListDeveloper**](#desenvolvedor-especifico): /api/developers/{id}/
+- [**Delete**](#deletar): /api/developers/{id}/
 
 ## Acesso
 
@@ -102,15 +87,15 @@ Resposta:
 - `refresh`: Token com um tempo de vida maior para atualizar o Token de acesso.
 
 
-### Dados do usuário:
+### Dados do desenvolvedor:
 
-O endpoint de dados do usuário é útil para pegar os dados como *nome*, *data de nascimento*, entre outros dados referentes ao usuário vinculado ao token de acesso.
+O endpoint de dados do desenvolvedor é útil para pegar os dados como *nome*, *data de nascimento*, entre outros dados referentes ao desenvolvedor vinculado ao token de acesso.
 
-- Endpoint: **/api/user/**
+- Endpoint: **/api/developers/**
 - Allowed method: GET
 - Authorization necessária
 
-Para pegar os dados do usuário deve ser feito uma requisição com o verbo http GET ao endpoint, e no header da requisição deve conter o campo de Authorization com o token de acesso Bearer válido do usuário.
+Para pegar os dados do desenvolvedor deve ser feito uma requisição com o verbo http GET ao endpoint, e no header da requisição deve conter o campo de Authorization com o token de acesso Bearer válido do usuário.
 
 *GET*:
 
@@ -123,22 +108,23 @@ Resposta:
 *status_code*: 200
 ```json
 {
-    "id": 6,
-    "name": "Bob",
-    "birthdate": "2000-04-04",
-    "cpf": "342334",
-    "client_id": 5,
-    "created_at": "2021-06-29T22:01:34.272427-03:00",
-    "updated_at": "2021-06-29T21:16:48.035644-03:00",
-    "active": true
+    "id": 3,
+    "created_at": "2021-11-01T21:44:28.574882-03:00",
+    "updated_at": "2021-10-30T08:42:28.488682-03:00",
+    "active": true,
+    "name": "Weslley Oliveira",
+    "sexo": "M",
+    "age": 28,
+    "hobby": "Jogar bola",
+    "birthdate": "1999-10-21"
 }
 ```
 
-### Usuário especifico:
+### Desenvolvedor especifico:
 
-O endpoint para mostrar dados de um usuário em especifico é útil para pegar/atualizar os dados de um usuário como *nome*, *data de nascimento*, *cpf*, entre outros dados referentes ao usuário de id igual ao repassado na url.
+O endpoint para mostrar dados de um desenvolvedor em especifico é útil para pegar/atualizar os dados de um usuário como *nome*, *data de nascimento*, *idade*, entre outros dados referentes ao usuário de id igual ao repassado na url.
 
-- Endpoint: **/api/user/{user_id}/**
+- Endpoint: **/api/developers/{id}/**
 - Allowed method: GET
 - Authorization necessária
 
@@ -155,29 +141,62 @@ Resposta:
 *status_code*: 200
 ```json
 {
-    "id": 6,
-    "name": "Bob",
-    "birthdate": "2000-04-04",
-    "cpf": "342334",
-    "client_id": 5,
-    "created_at": "2021-06-29T22:01:34.272427-03:00",
-    "updated_at": "2021-06-29T21:16:48.035644-03:00",
-    "active": true
+    "id": 3,
+    "created_at": "2021-11-01T21:44:28.574882-03:00",
+    "updated_at": "2021-10-30T08:42:28.488682-03:00",
+    "active": true,
+    "name": "Weslley Oliveira",
+    "sexo": "M",
+    "age": 28,
+    "hobby": "Jogar bola",
+    "birthdate": "1999-10-21"
 }
 ```
 
+### Criar desenvolvedor:
 
-### Dados do cliente:
+O endpoint para criar um desenvolvedor
 
-O endpoint de dados do cliente é útil para pegar os dados como *nome*, *local*, entre outros dados referentes ao cliente.
-
-- Endpoint: **/api/client/**
-- Allowed method: GET
+- Endpoint: **/api/developers/**
+- Allowed method: POST
 - Authorization necessária
 
-Para pegar os dados do cliente deve ser feito uma requisição com o verbo http GET ao endpoint, e no header da requisição deve conter o campo de Authorization com o token de acesso Bearer válido do cliente.
+Para criar um desenvolvedor deve ser feito uma requisição com o verbo http POST ao endpoint, e no header da requisição deve conter o campo de Authorization com o token de acesso JWT válido do usuário.
 
-*GET*:
+*POST*:
+
+Header
+
+    Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIi...
+
+Resposta:
+
+*status_code*: 201
+```json
+{
+    "id": 3,
+    "created_at": "2021-11-01T21:44:28.574882-03:00",
+    "updated_at": "2021-10-30T08:42:28.488682-03:00",
+    "active": true,
+    "name": "Weslley Oliveira",
+    "sexo": "M",
+    "age": 28,
+    "hobby": "Jogar bola",
+    "birthdate": "1999-10-21"
+}
+```
+
+### Atualizar desenvolvedor:
+
+O endpoint para atualizar um desenvolvedor
+
+- Endpoint: **/api/developers/{id}/**
+- Allowed method: POST
+- Authorization necessária
+
+Para atualizar um desenvolvedor deve ser feito uma requisição com o verbo http POST ao endpoint passando o id do desenvolvedor, e no header da requisição deve conter o campo de Authorization com o token de acesso JWT válido do usuário.
+
+*POST*:
 
 Header
 
@@ -188,26 +207,29 @@ Resposta:
 *status_code*: 200
 ```json
 {
-    "id": 5,
-    "name": "Unimed Teresina02",
-    "address_client": "Teresina",
-    "created_at": "2021-06-29T21:11:10.904421-03:00",
-    "updated_at": "2021-06-29T21:11:10.904476-03:00",
-    "active": true
+    "id": 3,
+    "created_at": "2021-11-01T21:44:28.574882-03:00",
+    "updated_at": "2021-10-30T08:42:28.488682-03:00",
+    "active": true,
+    "name": "Weslley Oliveira",
+    "sexo": "M",
+    "age": 28,
+    "hobby": "Jogar bola",
+    "birthdate": "1999-10-21"
 }
 ```
 
-### Dados de endereço:
+### Deletar desenvolvedor:
 
-O endpoint de dados de endereço é útil para pegar os dados como *user_id*, *local*, *is_main* entre outros dados referentes ao endereço vinculado a um usuário
+O endpoint para deletar um desenvolvedor
 
-- Endpoint: **/api/address/**
-- Allowed method: GET
+- Endpoint: **/api/developers/{id}/**
+- Allowed method: DELETE
 - Authorization necessária
 
-Para pegar os dados de endereço de um usuário deve ser feito uma requisição com o verbo http GET ao endpoint, e no header da requisição deve conter o campo de Authorization com o token de acesso Bearer válido do usuário.
+Para deletar um desenvolvedor deve ser feito uma requisição com o verbo http DELETE ao endpoint passando o id do desenvolvedor, e no header da requisição deve conter o campo de Authorization com o token de acesso JWT válido do usuário.
 
-*GET*:
+*POST*:
 
 Header
 
@@ -215,15 +237,5 @@ Header
 
 Resposta:
 
-*status_code*: 200
-```json
-{
-    "id": 7,
-    "user_id": 6,
-    "local": "Teresina",
-    "is_main": true,
-    "created_at": "2021-06-29T21:17:26.314467-03:00",
-    "updated_at": "2021-06-29T21:17:26.314514-03:00",
-    "active": true
-}
+*status_code*: 204
 ```
